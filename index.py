@@ -6,7 +6,6 @@ import glob
 
 src_directory = 'orginal_directory/'
 dst_directory = 'new_directory/'
-languages_list = []
 
 def include_patterns(*patterns):
     def _ignore_patterns(path, names):
@@ -21,11 +20,8 @@ try:
     get_file_from_each_languages = glob.glob(src_directory + '*-1.txt')
     for file in get_file_from_each_languages:
         language = path.basename(file).split('-', 1)[0]
-        languages_list.append(language)
         if isdir(dst_directory + language + '/'):
             rmtree(dst_directory + language + '/')
-    
-    for language in languages_list:
         temp_dst_directory = dst_directory + language + '/'
         copytree(src_directory, temp_dst_directory, "false"
                 , ignore = include_patterns(language + '-*.txt'))
